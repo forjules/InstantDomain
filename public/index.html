@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InstantDomain - Search</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-glow"></div>
+
+  <div class="app-container">
+    <!-- Top Navigation / Brand -->
+    <header class="navbar">
+      <div class="nav-left-group">
+        <a href="/search" class="logo">
+          <span class="logo-title">InstantDomain</span>
+        </a>
+        <span class="badge-tech">Two-Tier DoH + RDAP</span>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs">
+        <a href="/search" class="nav-tab active">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>Search</span>
+        </a>
+        <a href="/generator" class="nav-tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span>Generator</span>
+        </a>
+      </nav>
+
+      <div class="nav-right">
+        <div class="stream-status" id="streamStatus">
+          <span class="status-dot"></span>
+          <span class="status-text" id="statusText">Ready</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero / Search Section -->
+    <section class="hero-section">
+      <h1 class="hero-title">Instant Domain <span class="gradient-text">Search</span></h1>
+      <p class="hero-subtitle">
+        Sub-50ms real-time generation powered by Cloudflare DNS-over-HTTPS & authoritative RDAP fallback.
+      </p>
+
+      <!-- Massive Centered Search Bar -->
+      <div class="search-box-wrapper">
+        <div class="search-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Type a keyword (e.g. pulse, zenith, cloud, forge)..." 
+          autocomplete="off" 
+          autocorrect="off" 
+          autocapitalize="off" 
+          spellcheck="false"
+          autofocus
+        />
+        <button id="clearBtn" class="clear-btn" aria-label="Clear search" title="Clear (Esc)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div id="searchSpinner" class="search-spinner hidden"></div>
+      </div>
+
+      <!-- Quick Suggestion Tags -->
+      <div class="suggestions-row" id="suggestionsRow">
+        <span class="suggestions-label">Try:</span>
+        <button class="suggestion-chip" data-term="nexus">nexus</button>
+        <button class="suggestion-chip" data-term="orbit">orbit</button>
+        <button class="suggestion-chip" data-term="zenith">zenith</button>
+        <button class="suggestion-chip" data-term="flow">flow</button>
+        <button class="suggestion-chip" data-term="vector">vector</button>
+        <button class="suggestion-chip" data-term="forge">forge</button>
+      </div>
+
+      <!-- Live Telemetry / Metrics Bar -->
+      <div class="metrics-bar" id="metricsBar">
+        <div class="metric-item">
+          <span class="metric-label">Checked</span>
+          <span class="metric-value" id="metricTotal">0</span>
+        </div>
+        <div class="metric-separator"></div>
+        <div class="metric-item highlight-available">
+          <span class="metric-label">Available</span>
+          <span class="metric-value" id="metricAvailable">0</span>
+        </div>
+        <div class="metric-separator"></div>
+        <div class="metric-item highlight-taken">
+          <span class="metric-label">Taken</span>
+          <span class="metric-value" id="metricTaken">0</span>
+        </div>
+        <div class="metric-separator"></div>
+        <div class="metric-item">
+          <span class="metric-label">Avg Speed</span>
+          <span class="metric-value font-mono" id="metricSpeed">-</span>
+        </div>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="filters-row" id="filtersRow">
+        <span class="filters-label">Filter:</span>
+        <button class="filter-chip active" data-filter="all">All TLDs</button>
+        <button class="filter-chip" data-filter="com">.com</button>
+        <button class="filter-chip" data-filter="ai">.ai</button>
+        <button class="filter-chip" data-filter="io">.io</button>
+        <button class="filter-chip" data-filter="pw">.pw</button>
+        <button class="filter-chip" data-filter="sh">.sh</button>
+        <button class="filter-chip" data-filter="ro">.ro</button>
+        <button class="filter-chip" data-filter="co">.co</button>
+        <button class="filter-chip" data-filter="dev">.dev / .app</button>
+      </div>
+    </section>
+
+    <!-- Main Results Grid: Two Distinct Columns -->
+    <main class="results-container">
+      <!-- Column 1: Available (Green) -->
+      <section class="column available-column">
+        <div class="column-header">
+          <div class="column-title-wrap">
+            <span class="column-icon green">●</span>
+            <h2 class="column-title">Available Domains</h2>
+          </div>
+          <span class="column-counter green" id="availableCounter">0</span>
+        </div>
+
+        <div class="cards-list" id="availableList">
+          <div class="empty-placeholder" id="availableEmpty">
+            <div class="placeholder-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-green);">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+            <p class="placeholder-text">Available domains will stream here in real-time.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Column 2: Taken (Muted/Gray) -->
+      <section class="column taken-column">
+        <div class="column-header">
+          <div class="column-title-wrap">
+            <span class="column-icon gray">●</span>
+            <h2 class="column-title">Registered / Taken</h2>
+          </div>
+          <span class="column-counter gray" id="takenCounter">0</span>
+        </div>
+
+        <div class="cards-list" id="takenList">
+          <div class="empty-placeholder" id="takenEmpty">
+            <div class="placeholder-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-gray);">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <p class="placeholder-text">Taken domains discovered via DoH/RDAP will appear here.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-left">
+        <span>Instant Domain Search Pipeline &bull; Cloudflare 1.1.1.1 DoH &bull; ICANN RDAP</span>
+      </div>
+      <div class="footer-right">
+        <span>Sub-50ms Reactive UI</span>
+      </div>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast hidden">Copied to clipboard!</div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

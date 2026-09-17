@@ -1,0 +1,20 @@
+{
+  "name": "instant-domain-generator",
+  "version": "1.0.0",
+  "description": "Instant Domain Name Generator and Availability Checker",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node test/test-engine.js"
+  },
+  "keywords": ["domain", "doh", "rdap", "sse", "instant-search"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "p-limit": "^6.2.0"
+  }
+}

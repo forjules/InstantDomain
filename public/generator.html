@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InstantDomain - Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-glow"></div>
+
+  <div class="app-container">
+    <!-- Top Navigation / Brand -->
+    <header class="navbar">
+      <div class="nav-left-group">
+        <a href="/search" class="logo">
+          <span class="logo-title">InstantDomain</span>
+        </a>
+        <span class="badge-tech">Two-Tier DoH + RDAP</span>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs">
+        <a href="/search" class="nav-tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>Search</span>
+        </a>
+        <a href="/generator" class="nav-tab active">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span>Generator</span>
+        </a>
+      </nav>
+
+      <div class="nav-right">
+        <div class="stream-status" id="streamStatus">
+          <span class="status-dot"></span>
+          <span class="status-text" id="statusText">Ready</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero / Generator Section -->
+    <section class="hero-section">
+      <h1 class="hero-title">Brand Identity <span class="gradient-text">Generator</span></h1>
+      <p class="hero-subtitle">
+        Transform keywords into real business names with neologisms, letter shuffling, and semantic meaning associations.
+      </p>
+
+      <!-- Generator Configuration Card -->
+      <div class="generator-card">
+        <!-- 1. Keyword Input with Tag Management -->
+        <div class="gen-section">
+          <div class="gen-section-header">
+            <label class="gen-label">1. Enter Root Keywords <span class="gen-sublabel">(press Enter or comma)</span></label>
+            <div class="keyword-quick-samples">
+              <span class="text-dim">Try:</span>
+              <button class="keyword-sample-btn" data-keywords="host">host</button>
+              <button class="keyword-sample-btn" data-keywords="cloud">cloud</button>
+              <button class="keyword-sample-btn" data-keywords="pulse">pulse</button>
+              <button class="keyword-sample-btn" data-keywords="forge">forge</button>
+              <button class="keyword-sample-btn" data-keywords="nexus">nexus</button>
+            </div>
+          </div>
+          
+          <div class="tags-input-container" id="tagsContainer">
+            <div id="tagsList" class="tags-list"></div>
+            <input 
+              type="text" 
+              id="keywordInput" 
+              class="tag-input-field" 
+              placeholder="e.g. host (hit Enter)..." 
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <!-- 2. Brand Identity Generation Styles -->
+        <div class="gen-section">
+          <label class="gen-label">2. Brand Creation Style</label>
+          <div class="vibe-chips-grid" id="brandStyleGrid">
+            <button class="vibe-chip active" data-style="all">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="vibe-icon">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <div class="vibe-chip-content">
+                <span class="vibe-chip-title">All Styles</span>
+                <span class="vibe-chip-desc">Neologisms, Shuffled & Semantics</span>
+              </div>
+            </button>
+            <button class="vibe-chip" data-style="neologism">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="vibe-icon">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+              <div class="vibe-chip-content">
+                <span class="vibe-chip-title">Neologisms</span>
+                <span class="vibe-chip-desc">e.g. hostia, hosters, hostix</span>
+              </div>
+            </button>
+            <button class="vibe-chip" data-style="shuffled">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="vibe-icon">
+                <polyline points="16 3 21 3 21 8"></polyline>
+                <line x1="4" y1="20" x2="21" y2="3"></line>
+                <polyline points="21 16 21 21 16 21"></polyline>
+                <line x1="15" y1="15" x2="21" y2="21"></line>
+                <line x1="4" y1="4" x2="9" y2="9"></line>
+              </svg>
+              <div class="vibe-chip-content">
+                <span class="vibe-chip-title">Shuffled & Anagrams</span>
+                <span class="vibe-chip-desc">e.g. soth, sothing, tosh</span>
+              </div>
+            </button>
+            <button class="vibe-chip" data-style="semantic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="vibe-icon">
+                <path d="M9 18h6"></path>
+                <path d="M10 22h4"></path>
+                <path d="M12 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6h8c1.5-1.5 3-3.5 3-6a7 7 0 0 0-7-7z"></path>
+              </svg>
+              <div class="vibe-chip-content">
+                <span class="vibe-chip-title">Semantic Meaning</span>
+                <span class="vibe-chip-desc">e.g. havenly, nodex, nestara</span>
+              </div>
+            </button>
+            <button class="vibe-chip" data-style="compound">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="vibe-icon">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <div class="vibe-chip-content">
+                <span class="vibe-chip-title">Compound Blends</span>
+                <span class="vibe-chip-desc">e.g. hostcloud, flowpulse</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. TLD Selection (Includes .pw, .sh, .ro, etc.) -->
+        <div class="gen-section">
+          <div class="gen-section-header">
+            <label class="gen-label">3. Target TLD Extensions</label>
+            <div class="tld-quick-actions">
+              <button id="tldSelectAll" class="text-btn">Select All</button>
+              <button id="tldSelectPopular" class="text-btn">Popular Only</button>
+              <button id="tldClearAll" class="text-btn">Clear</button>
+            </div>
+          </div>
+          <div class="tlds-selector-grid" id="tldGrid">
+            <!-- TLD Pills with .pw, .sh, .ro prominent -->
+            <button class="tld-toggle-btn active" data-tld="com">.com</button>
+            <button class="tld-toggle-btn active" data-tld="io">.io</button>
+            <button class="tld-toggle-btn active" data-tld="ai">.ai</button>
+            <button class="tld-toggle-btn active" data-tld="co">.co</button>
+            <button class="tld-toggle-btn active highlight-tld" data-tld="pw">.pw</button>
+            <button class="tld-toggle-btn active highlight-tld" data-tld="sh">.sh</button>
+            <button class="tld-toggle-btn active highlight-tld" data-tld="ro">.ro</button>
+            <button class="tld-toggle-btn" data-tld="dev">.dev</button>
+            <button class="tld-toggle-btn" data-tld="app">.app</button>
+            <button class="tld-toggle-btn" data-tld="net">.net</button>
+            <button class="tld-toggle-btn" data-tld="org">.org</button>
+            <button class="tld-toggle-btn" data-tld="xyz">.xyz</button>
+            <button class="tld-toggle-btn" data-tld="tech">.tech</button>
+            <button class="tld-toggle-btn" data-tld="space">.space</button>
+          </div>
+        </div>
+
+        <!-- 4. Action Submit Button -->
+        <div class="gen-action-row">
+          <button id="generateBtn" class="btn-generate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span class="btn-text">Generate & Check Availability</span>
+            <div id="genSpinner" class="btn-spinner hidden"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Telemetry / Metrics Bar -->
+      <div class="metrics-bar" id="metricsBar">
+        <div class="metric-item">
+          <span class="metric-label">Checked</span>
+          <span class="metric-value" id="metricTotal">0</span>
+        </div>
+        <div class="metric-separator"></div>
+        <div class="metric-item highlight-available">
+          <span class="metric-label">Available</span>
+          <span class="metric-value" id="metricAvailable">0</span>
+        </div>
+        <div class="metric-separator"></div>
+        <div class="metric-item highlight-taken">
+          <span class="metric-label">Taken</span>
+          <span class="metric-value" id="metricTaken">0</span>
+        </div>
+        <div class="metric-separator"></div>
+        <div class="metric-item">
+          <span class="metric-label">Avg Speed</span>
+          <span class="metric-value font-mono" id="metricSpeed">-</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Results Grid: Two Distinct Columns -->
+    <main class="results-container">
+      <!-- Column 1: Available (Green) -->
+      <section class="column available-column">
+        <div class="column-header">
+          <div class="column-title-wrap">
+            <span class="column-icon green">●</span>
+            <h2 class="column-title">Available Generated Domains</h2>
+          </div>
+          <span class="column-counter green" id="availableCounter">0</span>
+        </div>
+
+        <div class="cards-list" id="availableList">
+          <div class="empty-placeholder" id="availableEmpty">
+            <div class="placeholder-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-green);">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+            <p class="placeholder-text">Generated available domains will stream here dynamically as they resolve.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Column 2: Taken (Muted/Gray) -->
+      <section class="column taken-column">
+        <div class="column-header">
+          <div class="column-title-wrap">
+            <span class="column-icon gray">●</span>
+            <h2 class="column-title">Registered / Taken</h2>
+          </div>
+          <span class="column-counter gray" id="takenCounter">0</span>
+        </div>
+
+        <div class="cards-list" id="takenList">
+          <div class="empty-placeholder" id="takenEmpty">
+            <div class="placeholder-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-gray);">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <p class="placeholder-text">Registered domains discovered via DoH/RDAP will appear here.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-left">
+        <span>Instant Domain Generator &bull; Cloudflare DoH &bull; Authoritative RDAP &bull; TLDs: .pw, .sh, .ro, .com & more</span>
+      </div>
+      <div class="footer-right">
+        <span>Sub-50ms Reactive UI</span>
+      </div>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast hidden">Copied to clipboard!</div>
+
+  <script type="module" src="generator.js"></script>
+</body>
+</html>
