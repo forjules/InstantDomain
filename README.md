@@ -4,7 +4,7 @@ A high-performance, real-time domain search and generation engine inspired by `i
 
 ---
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/forjules/InstantDomain)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-emerald?style=for-the-badge&logo=vercel)](https://YOUR_RENDER_URL.onrender.com)
 
 ## 🌟 Pages & Architecture
 
