@@ -4,7 +4,7 @@ A high-performance, real-time domain search and generation engine inspired by `i
 
 ---
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-emerald?style=for-the-badge&logo=vercel)](https://YOUR_RENDER_URL.onrender.com)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-emerald?style=for-the-badge&logo=vercel)](https://instantdomain.onrender.com)
 
 ## 🌟 Pages & Architecture
 
