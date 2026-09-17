@@ -4,6 +4,8 @@ A high-performance, real-time domain search and generation engine inspired by `i
 
 ---
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/forjules/InstantDomain)
+
 ## 🌟 Pages & Architecture
 
 ### 1. ⚡ Search Page (`/search` or `/`)
